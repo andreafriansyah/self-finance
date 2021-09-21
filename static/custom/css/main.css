@@ -1,0 +1,51 @@
+.main-sidebar .sidebar-brand a {
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: white;
+    font-weight: bold;
+}
+.main-sidebar .sidebar-brand {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    background-color: #2781C4;
+    color: white;
+}
+h5.address{
+    font-size: 14px !important;
+}
+.invalid-feedback{
+    color: #dc3545 !important;
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80% !important;
+}
+
+.modal-load{
+    background: transparent !important;
+    border: none !important;
+    box-shadow : none !important;
+}  
+
+.swal-button.swal-button--confirm {
+    box-shadow: 0 2px 6px #1d72b3;
+    background-color: #2781C4;
+}
+
+.detail-profile{
+    border-left:3px solid #ded4da;
+}
+
+.img-profile{
+    max-height: 250px;
+}
+
+.time-live{
+    line-height: 28px;
+    color: #2781C4;
+    margin-bottom: 0;
+    margin-top: -10px;
+}

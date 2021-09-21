@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <title>Belajar Beego Live</title>
+</head>
+<body>
+    <div class="login-page">
+        <div class="form">
+            <form class="login-form" id="login-form" method="POST">
+                {{ .xsrfdata }}
+
+                {{template "partial/shared/loader.html"}}
+
+                <input type="email" placeholder="email" name="email" id="email"/>
+                <input type="password" placeholder="password" name="password" id="password"/>
+
+                
+                <button type="submit" name="login">login</button>
+                
+            </form>
+        </div>
+        {{ if .HasErrors }}
+        <div class="summary-errors alert alert-danger alert-dismissible">
+            <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+            </button>
+            <p>Errors list below: </p>
+            <ul>
+            {{ range $key, $value := .Errors }}
+            <li><strong> {{ $value }}</strong></li>
+            {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="/static/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="/static/js/login.js"></script>
+<script src="/static/custom/modules/jquery.validate/jquery.validate.js"></script>
+<script src="/static/custom/js/main.js"></script>
+<script src="/static/modules/sweetalert/sweetalert.min.js"></script>
+<script src="/static/custom/modules/js.cookie/js.cookie.min.js"></script>
+<script src="/static/modules/izitoast/js/iziToast.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("form").validate({
+            rules: {
+                email: {
+                    email: true,
+                    required: true,
+                },
+                password: {
+                    required: true,
+                }
+            },
+            submitHandler: function (form) {
+                if ($("form").hasClass("success")) {
+                    return true;
+                } else {
+                    var data = {
+                        email: $("#email").val(),
+                        password: $("#password").val(),
+                    }
+                    validate(data, '/validate-login', form = "form")
+                }
+            },
+        });
+    })
+</script>
+</html>
