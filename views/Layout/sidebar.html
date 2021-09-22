@@ -10,32 +10,30 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <li class="nav-item">
-          <a href="/home" class="nav-link active" >
-            <i class="nav-icon fas fa-th"></i>
+          <a href="/home" id="tab-home" class="nav-link" >
+            <i class="fas fa-home"></i>
             <p>
               Home
             </p>
           </a>
         </li>
-        <!-- Add icons to the links using the .nav-icon class
-             with font-awesome or any other icon font library -->
-        <li class="nav-item menu-open">
+        <li class="nav-item" id="tab-report">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <i class="fas fa-money-check-alt"></i>
             <p>
               Report
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="./index.html" class="nav-link">
+            <li class="nav-item" >
+              <a href="/income" id="tab-income" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Pemasukan</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="./index2.html" class="nav-link">
+            <li class="nav-item" >
+              <a href="/outcome" id="tab-outcome" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Pengeluaran</p>
               </a>

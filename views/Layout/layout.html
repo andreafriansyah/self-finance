@@ -25,14 +25,13 @@
   <link rel="stylesheet" href="static/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="static/plugins/summernote/summernote-bs4.min.css">
+  <link rel="stylesheet" href="/static/css/custom-css.css">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
-  </div>
+  {{template "partial/shared/loader.html"}}
 
   <!-- Navbar -->
   {{.Header}}
@@ -90,7 +89,26 @@
 <script src="static/dist/js/adminlte.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="static/dist/js/demo.js"></script>
+
+<script src="/static/modules/jquery.sparkline.min.js"></script>
+<script src="/static/modules/chart.min.js"></script>
+<script src="/static/modules/owlcarousel2/dist/owl.carousel.min.js"></script>
+<script src="/static/modules/summernote/summernote-bs4.js"></script>
+<script src="/static/modules/chocolat/dist/js/jquery.chocolat.min.js"></script>
+<script src="/static/modules/sweetalert/sweetalert.min.js"></script>
+<script src="/static/custom/modules/js.cookie/js.cookie.min.js"></script>
+<script src="/static/modules/izitoast/js/iziToast.min.js"></script>
+<script src="/static/modules/datatables/datatables.min.js"></script>
+<script src="/static/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js"></script>
+<script src="/static/modules/datatables/Select-1.2.4/js/dataTables.select.min.js"></script>
+<script src="/static/modules/jquery-ui/jquery-ui.min.js"></script>
+<script src="/static/modules/select2/dist/js/select2.min.js"></script>
+<script src="/static/modules/bootstrap-daterangepicker/daterangepicker.js"></script>
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="static/dist/js/pages/dashboard.js"></script>
+
+{{.Script}}
+
 </body>
 </html>
