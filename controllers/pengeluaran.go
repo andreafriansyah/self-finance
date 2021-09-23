@@ -8,6 +8,8 @@ import (
 	servicesModel "bobee/services/outcomeServices"
 	"log"
 	"strconv"
+
+	"github.com/astaxie/beego/validation"
 )
 
 type PengeluaranController struct {
@@ -48,4 +50,53 @@ func (c *PengeluaranController) JSON() {
 		"data":            resultData,
 	}
 	c.ServeJSON()
+}
+
+func (c *PengeluaranController) Tambah() {
+	c.Layout = "Layout/layout.html"
+	c.TplName = "Pages/pengeluaran/tambah.html"
+	c.LayoutSections["Script"] = "Pages/pengeluaran/tambah.tpl"
+	services.TemplateAdmin(c.AdminController)
+}
+
+func (c *PengeluaranController) TambahData() {
+	c.Layout = "Layout/layout.html"
+	c.TplName = "Pages/pengeluaran/tambah.html"
+	c.LayoutSections["Script"] = "Pages/pengeluaran/tambah.tpl"
+	services.TemplateAdmin(c.AdminController)
+
+	form := models.Finances{}
+	if err := c.ParseForm(&form); err != nil {
+		log.Println("[Error] InfoController.DoAdd BadRequest : ", err)
+		c.Abort("500")
+	}
+	c.Data["Form"] = form
+
+	//check validate
+	//check validate
+	valid := validation.Validation{}
+	valid.Required(form.Jumlah, "Jumlah").Message("is required")
+	valid.Required(form.AsalTujuan, "Asal").Message("is required")
+	valid.Required(form.Keterangan, "Keterangan").Message("is required")
+
+	errorMap := []string{}
+	if valid.HasErrors() {
+		for _, err := range valid.Errors {
+			log.Println(err.Key, err.Message)
+			errorMap = append(errorMap, err.Key+" "+err.Message)
+		}
+		c.Data["HasErrors"] = true
+		c.Data["Errors"] = errorMap
+		return
+	}
+
+	//validate name
+	_, err := servicesModel.Create(form)
+	if err != nil {
+		log.Println("[Error] InfoController.DoAdd BadRequest : ", err)
+		c.Abort("500")
+		return
+	}
+
+	c.Redirect("/outcome", 302)
 }

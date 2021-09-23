@@ -30,7 +30,7 @@
                 name: "jumlah",
             },
             {
-                title: "Asal",
+                title: "Tujuan",
                 data: "asaltujuan",
                 name: "asaltujuan",
             },

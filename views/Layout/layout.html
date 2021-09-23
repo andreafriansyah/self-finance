@@ -107,6 +107,39 @@
 
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="static/dist/js/pages/dashboard.js"></script>
+<script>
+  function logout(){
+    swal({
+      title: "Apakah anda Yakin?",
+      text: "Anda Akan keluar dari aplikasi",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        $.ajax({
+          method : "GET",
+          url: "/sign-out",
+          success:function(){
+              swal({
+                title: 'Logout Berhasil',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                showLoaderOnConfirm: true
+              });
+              setInterval(function(){
+              location.reload();
+              }, 2000);
+          },
+          error:function(error){
+              console.log(error);
+          }
+      });
+      }
+    });
+  }  
+  </script>
 
 {{.Script}}
 

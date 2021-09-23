@@ -52,3 +52,16 @@ func GetDataByFilter(asaltujuan string, keyword string, orderBy, orderDir string
 	totalDatas = len(totalData)
 	return data, totalDatas, nil
 }
+
+// Create add database
+func Create(request models.Finances) (models.Finances, error) {
+	res := database.Conn.Table("finances").Create(&request).Scan(&request)
+	err := res.Error
+
+	if err != nil {
+		log.Println("[Error] infoService.Create : ", err)
+		return models.Finances{}, err
+	}
+
+	return request, nil
+}

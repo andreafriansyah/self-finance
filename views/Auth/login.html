@@ -16,30 +16,25 @@
         <div class="form">
             <form class="login-form" id="login-form" method="POST">
                 {{ .xsrfdata }}
-
                 {{template "partial/shared/loader.html"}}
-
                 <input type="email" placeholder="email" name="email" id="email"/>
                 <input type="password" placeholder="password" name="password" id="password"/>
-
-                
-                <button type="submit" name="login">login</button>
-                
+                <button type="submit" name="login">login</button>    
             </form>
-        </div>
-        {{ if .HasErrors }}
-        <div class="summary-errors alert alert-danger alert-dismissible">
-            <button type="button" class="close" aria-label="Close" data-dismiss="alert">
-            <span aria-hidden="true">×</span>
-            </button>
-            <p>Errors list below: </p>
-            <ul>
-            {{ range $key, $value := .Errors }}
-            <li><strong> {{ $value }}</strong></li>
+            {{ if .HasErrors }}
+            <div class="summary-errors alert alert-danger alert-dismissible">
+                <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+                <span aria-hidden="true">×</span>
+                </button>
+                <p>Errors list below: </p>
+                <ul>
+                {{ range $key, $value := .Errors }}
+                <li><strong> {{ $value }}</strong></li>
+                {{ end }}
+                </ul>
+            </div>
             {{ end }}
-            </ul>
         </div>
-        {{ end }}
     </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
