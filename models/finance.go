@@ -7,7 +7,7 @@ import (
 type Finances struct {
 	ID         int       `gorm:"column:id;AUTO_INCREMENT" json:"id"`
 	Tipe       string    `gorm:"column:type" json:"type" form:"type"`
-	Jumlah     string    `gorm:"column:jumlah" json:"jumlah" form:"jumlah"`
+	Jumlah     int       `gorm:"column:jumlah" json:"jumlah" form:"jumlah"`
 	AsalTujuan string    `gorm:"column:asaltujuan" json:"asaltujuan" form:"asaltujuan"`
 	Tanggal    time.Time `gorm:"column:tanggal" json:"tanggal" form:"tanggal"`
 	Keterangan string    `gorm:"column:keterangan" json:"keterangan" form:"keterangan"`

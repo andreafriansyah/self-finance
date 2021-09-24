@@ -6,6 +6,7 @@ import (
 	"bobee/services"
 
 	servicesModel "bobee/services/outcomeServices"
+	saldoServices "bobee/services/saldoServices"
 	"log"
 	"strconv"
 
@@ -94,6 +95,13 @@ func (c *PengeluaranController) TambahData() {
 	_, err := servicesModel.Create(form)
 	if err != nil {
 		log.Println("[Error] InfoController.DoAdd BadRequest : ", err)
+		c.Abort("500")
+		return
+	}
+
+	_, eror := saldoServices.AddOutcome(form.Jumlah)
+	if eror != nil {
+		log.Println("[Error] IncomeController.AddIncome BadRequest : ", eror)
 		c.Abort("500")
 		return
 	}

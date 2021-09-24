@@ -13,7 +13,7 @@ var users = []models.User{
 		Name:     "Admin",
 		Email:    "admin@gmail.com",
 		Gender:   "male",
-		Password: "d41d8cd98f00b204e9800998ecf8427e",
+		Password: "10c4981bb793e1698a83aea43030a388",
 		Photo:    "",
 	},
 }

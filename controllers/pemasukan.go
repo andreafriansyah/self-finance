@@ -6,6 +6,7 @@ import (
 	"bobee/services"
 
 	servicesModel "bobee/services/incomeServices"
+	saldoServices "bobee/services/saldoServices"
 	"log"
 	"strconv"
 
@@ -73,7 +74,6 @@ func (c *PemasukanController) TambahData() {
 	c.Data["Form"] = form
 
 	//check validate
-	//check validate
 	valid := validation.Validation{}
 	valid.Required(form.Jumlah, "Jumlah").Message("is required")
 	valid.Required(form.AsalTujuan, "Asal").Message("is required")
@@ -93,7 +93,14 @@ func (c *PemasukanController) TambahData() {
 	//validate name
 	_, err := servicesModel.Create(form)
 	if err != nil {
-		log.Println("[Error] InfoController.DoAdd BadRequest : ", err)
+		log.Println("[Error] IncomeController.DoAdd BadRequest : ", err)
+		c.Abort("500")
+		return
+	}
+
+	_, eror := saldoServices.AddIncome(form.Jumlah)
+	if eror != nil {
+		log.Println("[Error] IncomeController.AddIncome BadRequest : ", eror)
 		c.Abort("500")
 		return
 	}
