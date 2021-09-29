@@ -25,7 +25,8 @@ func (c *PemasukanController) GetIncome() {
 }
 
 func (c *PemasukanController) JSON() {
-	asaltujuan := c.GetString("asaltujuan")
+	dari_tanggal := c.GetString("dari_tanggal")
+	sampe_tanggal := c.GetString("sampe_tanggal")
 	search := c.GetString("search[value]")
 	orderColumn := c.GetString("order[0][column]")
 	orderBy := c.GetString("columns[" + orderColumn + "][name]")
@@ -36,7 +37,7 @@ func (c *PemasukanController) JSON() {
 	resultData := []models.Finances{}
 	var totalRows int
 
-	data, totalData, err := servicesModel.GetDataByFilter(asaltujuan, search, orderBy, orderDirection, start, length)
+	data, totalData, err := servicesModel.GetDataByFilter(dari_tanggal, sampe_tanggal, search, orderBy, orderDirection, start, length)
 	if err != nil {
 		log.Println("[Error] EmployeeController.Json : ", err)
 		c.ServeError(err)
@@ -78,6 +79,7 @@ func (c *PemasukanController) TambahData() {
 	valid.Required(form.Jumlah, "Jumlah").Message("is required")
 	valid.Required(form.AsalTujuan, "Asal").Message("is required")
 	valid.Required(form.Keterangan, "Keterangan").Message("is required")
+	valid.Required(form.Tanggal, "Tanggal").Message("is required")
 
 	errorMap := []string{}
 	if valid.HasErrors() {

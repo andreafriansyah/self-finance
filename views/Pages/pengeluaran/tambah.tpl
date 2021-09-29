@@ -1,6 +1,9 @@
 <script>
     $(document).ready(function () {
         $("#tab-report").addClass("menu-open");
-        $("#tab-income").addClass("active");
+        $("#tab-outcome").addClass("active");
     })
+    $( "#tanggal" ).datepicker({
+        dateFormat: 'yy-mm-dd',
+    });
 </script>

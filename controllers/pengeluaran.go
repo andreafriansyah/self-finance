@@ -25,7 +25,8 @@ func (c *PengeluaranController) GetOutcome() {
 }
 
 func (c *PengeluaranController) JSON() {
-	asaltujuan := c.GetString("asaltujuan")
+	dari_tanggal := c.GetString("dari_tanggal")
+	sampe_tanggal := c.GetString("sampe_tanggal")
 	search := c.GetString("search[value]")
 	orderColumn := c.GetString("order[0][column]")
 	orderBy := c.GetString("columns[" + orderColumn + "][name]")
@@ -36,7 +37,7 @@ func (c *PengeluaranController) JSON() {
 	resultData := []models.Finances{}
 	var totalRows int
 
-	data, totalData, err := servicesModel.GetDataByFilter(asaltujuan, search, orderBy, orderDirection, start, length)
+	data, totalData, err := servicesModel.GetDataByFilter(dari_tanggal, sampe_tanggal, search, orderBy, orderDirection, start, length)
 	if err != nil {
 		log.Println("[Error] EmployeeController.Json : ", err)
 		c.ServeError(err)

@@ -24,13 +24,16 @@ func GetAll(search string, orderBy string, orderDir string, skip int, limit int)
 	return data, totalData, nil
 }
 
-func GetDataByFilter(asaltujuan string, keyword string, orderBy, orderDir string, skip int, limit int) ([]models.Finances, int, error) {
+func GetDataByFilter(dari_tanggal, sampe_tanggal, keyword string, orderBy, orderDir string, skip int, limit int) ([]models.Finances, int, error) {
 	data := []models.Finances{}
 	totalData := []models.Finances{}
 	var totalDatas int
 
-	if asaltujuan == "" {
-		res := database.Conn.Raw("select id, type, asaltujuan, jumlah, keterangan, tanggal from finances where type = 'Pengeluaran'")
+	if dari_tanggal == "" && sampe_tanggal == "" {
+		res := database.Conn.
+			Table("finances").
+			Where("type = 'Pengeluaran'").
+			Where("is_deleted = false")
 		res.Scan(&totalData)
 		res.Order(orderBy + " " + orderDir).Limit(limit).Offset(skip).Scan(&data)
 		err := res.Error
@@ -38,8 +41,12 @@ func GetDataByFilter(asaltujuan string, keyword string, orderBy, orderDir string
 			log.Println("[Error] financesServices.GetDataByFilter : ", err)
 			return []models.Finances{}, totalDatas, err
 		}
-	} else if asaltujuan != "" {
-		res := database.Conn.Table("select id, type, asaltujuan, jumlah, keterangan, tanggal from finances where type = 'Pengeluaran'")
+	} else if dari_tanggal != "" && sampe_tanggal != "" {
+		res := database.Conn.
+			Table("finances").
+			Where("type = 'Pengeluaran'").
+			Where("is_deleted = false").
+			Where("tanggal BETWEEN ? AND ?", dari_tanggal, sampe_tanggal)
 		res.Scan(&totalData)
 		res.Order(orderBy + " " + orderDir).Limit(limit).Offset(skip).Scan(&data)
 		err := res.Error

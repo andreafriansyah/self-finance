@@ -29,7 +29,6 @@ func (c *HomeController) JSON() {
 		return
 	}
 	resultData = data
-	log.Println("data ini :", data)
 
 	c.Data["json"] = map[string]interface{}{
 		"data": resultData,
