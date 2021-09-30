@@ -27,4 +27,5 @@ func init() {
 	beego.Router("/tambahreportout", &controllers.PengeluaranController{}, "post:TambahData")
 
 	beego.Router("/grafik", &controllers.GrafikController{}, "get:GetData")
+	beego.Router("/grafik/json", &controllers.GrafikController{}, "get:JSON")
 }

@@ -29,9 +29,6 @@ func GetDataByFilter(dari_tanggal, sampe_tanggal, keyword string, orderBy, order
 	totalData := []models.Finances{}
 	var totalDatas int
 
-	log.Println("dari tanggal :", dari_tanggal)
-	log.Println("sampe tanggal :", sampe_tanggal)
-
 	if dari_tanggal == "" && sampe_tanggal == "" {
 		res := database.Conn.
 			Table("finances").
