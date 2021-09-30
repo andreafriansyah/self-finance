@@ -18,6 +18,13 @@ var users = []models.User{
 	},
 }
 
+var saldos = []models.Saldo{
+	models.Saldo{
+		Namabank:    "BCA",
+		JumlahSaldo: 0,
+	},
+}
+
 // Conn ...
 var Conn *gorm.DB
 
@@ -30,7 +37,15 @@ func main() {
 	for _, k := range users {
 		err := Conn.Table("users").Create(&k)
 		if err != nil {
-			log.Println("[Error] seeder.main : ", err)
+			log.Println("[Error] seeder.User : ", err)
+		}
+		err = nil
+	}
+
+	for _, s := range saldos {
+		err := Conn.Table("saldos").Create(&s)
+		if err != nil {
+			log.Println("[Error] seeder.Saldo : ", err)
 		}
 		err = nil
 	}

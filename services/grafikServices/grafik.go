@@ -11,14 +11,14 @@ func GetDataByFilter(tahun string) ([]models.Income, []models.Outcome, error) {
 	outcome := models.Outcome{}
 	if tahun == "" {
 		res := database.Conn.Table("finances").
-			Select("sum(jumlah) as total").
+			Select("sum(jumlah)").
 			Where("type = 'Pemasukan'").
 			Where("extract(year from tanggal) = 2021").
 			Where("extract(month from tanggal) = 2021").
 			Scan(&income)
 
 		database.Conn.Table("finances").
-			Select("sum(jumlah) as total").
+			Select("sum(jumlah)").
 			Where("type = 'Pengeluaran'").
 			Where("extract(year from tanggal) = 2021").
 			Where("extract(month from tanggal) = 2021").
